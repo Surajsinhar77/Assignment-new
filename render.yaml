@@ -1,0 +1,51 @@
+# Render Configuration for Backend
+
+services:
+  - type: web
+    name: inventory-backend
+    env: python
+    plan: free
+    pythonVersion: 3.11
+    
+    # Source configuration
+    repo: https://github.com/your-username/your-repo
+    branch: main
+    
+    # Build and start commands
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "cd backend && uvicorn main:app --host 0.0.0.0 --port $PORT"
+    
+    # Environment variables
+    envVars:
+      - key: DATABASE_URL
+        scope: build
+        # Get this from Render PostgreSQL instance
+      - key: PYTHONUNBUFFERED
+        value: "1"
+      - key: ENVIRONMENT
+        value: "production"
+    
+    # Health check
+    healthCheckPath: /health
+    
+    # Disk
+    disk:
+      name: postgres-data
+      mountPath: /var/lib/postgresql/data
+      sizeGB: 1
+
+  - type: pserv
+    name: inventory-postgres
+    env: postgres
+    plan: free
+    postgresVersion: 15
+    ipWhitelist: []
+    
+    # Database configuration
+    databaseName: inventory_db
+    databaseUser: postgres
+    
+    # Disk
+    disk:
+      name: postgres-data
+      sizeGB: 1
