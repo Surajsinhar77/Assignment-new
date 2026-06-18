@@ -1,9 +1,11 @@
-FROM node:18-alpine AS builder
+FROM node:20-slim AS builder
 
 WORKDIR /app
 
-COPY package.json ./
+# Copy package files
+COPY package.json package-lock.json* ./
 
+# Install dependencies
 RUN npm install
 
 COPY . .
@@ -14,7 +16,7 @@ ENV VITE_API_URL=${VITE_API_URL}
 RUN npm run build
 
 # Production image
-FROM node:18-alpine
+FROM node:20-slim
 
 WORKDIR /app
 

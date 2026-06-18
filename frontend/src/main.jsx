@@ -11,15 +11,14 @@ import './index.css';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-      <div>
-        <App />
-        <Routes>
+      <Routes>
+        <Route element={<App />}>
           <Route path="/" element={<Dashboard />} />
           <Route path="/products" element={<Products />} />
           <Route path="/customers" element={<Customers />} />
           <Route path="/orders" element={<Orders />} />
-        </Routes>
-      </div>
+        </Route>
+      </Routes>
     </BrowserRouter>
   </React.StrictMode>,
 );

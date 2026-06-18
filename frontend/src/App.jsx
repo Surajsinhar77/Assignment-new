@@ -1,35 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import './App.css';
+import { Outlet } from 'react-router-dom';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
-    <div className="app">
-      <nav className="navbar">
-        <div className="nav-container">
-          <Link to="/" className="nav-logo">
-            📦 Inventory Management
-          </Link>
-          <ul className="nav-menu">
-            <li className="nav-item">
-              <Link to="/" className="nav-link">Dashboard</Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/products" className="nav-link">Products</Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/customers" className="nav-link">Customers</Link>
-            </li>
-            <li className="nav-item">
-              <Link to="/orders" className="nav-link">Orders</Link>
-            </li>
-          </ul>
-        </div>
-      </nav>
-      <main className="main-content">
-        <div className="page-content">
-          {/* Routes will be rendered here */}
-        </div>
+    <div className="min-h-screen bg-[hsl(var(--muted))]/30">
+      <Navbar />
+      <main className="max-w-7xl mx-auto px-6 py-8">
+        <Outlet />
       </main>
     </div>
   );
